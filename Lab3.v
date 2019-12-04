@@ -31,14 +31,35 @@ module Lab3(
 //=======================================================
 //  REG/WIRE declarations
 //=======================================================
+reg [1:0] current_state;
+wire [1:0] next_state;
+wire state_clock; 
 
+wire reset;
+wire hazard;
+wire turn;
 
+assign reset = KEY[0];
+assign hazard = SW[0];
+assign turn = SW[1];
+assign left = KEY[1];
+
+div10M_5 divider(ADC_CLK_10, ~reset, state_clock);
+
+next_state_logic nextStateLogic(reset, turn, hazard, next_state);
+
+assign LEDR[1:0] = next_state;
 
 
 //=======================================================
 //  Structural coding
 //=======================================================
+initial begin
+	current_state = 2b'0;
+end
 
-
+always @(posedge state_clock) begin
+	current_state = next_state;
+end
 
 endmodule

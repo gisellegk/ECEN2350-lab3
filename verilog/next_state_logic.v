@@ -1,41 +1,28 @@
 module next_state_logic(
-    input current_state,
     input reset, 
     input turn, 
     input hazard, 
     output reg [1:0]next_state
 );
 
-always @(current_state) begin
-    if(current_state == IDLE) begin
-        if(reset) go back to idle
-        if (turn) go to turn state
-        if(hazard) go to hazard state
-    end
-        IDLE: 
-        HAZARD:
-        TURN:
-        default:
-    endcase
 
+
+always @(*) begin
+    if(reset) next_state = IDLE; 
+    else if (hazard) next_state = HAZARD; 
+    else if(turn) next_state = TURN;
+    else next_state = IDLE;
 end
 
 endmodule
 
-/*    // some logic here
-    case(state)
-    if(state == idle) begin
-        
-    end
-    if(state == turn) begin
-        if(reset) go to idle
-        if (turn) go to turn state
-        if(hazard) go to hazard state
-    end
-    if(state == hazard) begin
-        if(reset) go to idle
-        //ignore turn
-        if(hazard) go to hazard state
-    end
-    
-    state_reg = next_state;*/
+/*
+
+RESET | HAZARD | TURN | STATE
+  1       x       x      IDLE
+  0       1       x      HAZARD
+  0       0       1      TURN
+  0       0       0      IDLE
+
+*/
+  
