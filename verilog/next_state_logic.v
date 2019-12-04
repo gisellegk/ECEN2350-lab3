@@ -5,7 +5,7 @@ module next_state_logic(
     output reg [1:0]next_state
 );
 
-
+`include "../verilog/params.vh"
 
 always @(*) begin
     if(reset) next_state = IDLE; 

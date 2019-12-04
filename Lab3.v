@@ -26,6 +26,7 @@ module Lab3(
 	input 		     [9:0]		SW
 );
 
+`include "verilog/params.vh"
 
 
 //=======================================================
@@ -39,7 +40,7 @@ wire reset;
 wire hazard;
 wire turn;
 
-assign reset = KEY[0];
+assign reset = ~KEY[0];
 assign hazard = SW[0];
 assign turn = SW[1];
 assign left = KEY[1];
@@ -49,13 +50,13 @@ div10M_5 divider(ADC_CLK_10, ~reset, state_clock);
 next_state_logic nextStateLogic(reset, turn, hazard, next_state);
 
 assign LEDR[1:0] = next_state;
-
+assign LEDR[2] = state_clock;
 
 //=======================================================
 //  Structural coding
 //=======================================================
 initial begin
-	current_state = 2b'0;
+	current_state = IDLE;
 end
 
 always @(posedge state_clock) begin
