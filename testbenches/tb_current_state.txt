@@ -1,0 +1,13 @@
+VCD info: dumpfile tb_current_state.vcd opened for output.
+Starting simulation
+                 100 reset=0 | turn=0 | hazard=0 | next_state=00
+                1100 reset=1 | turn=0 | hazard=0 | next_state=00
+                2100 reset=1 | turn=1 | hazard=0 | next_state=00
+                3100 reset=1 | turn=1 | hazard=1 | next_state=00
+                4100 reset=0 | turn=0 | hazard=0 | next_state=00
+                5100 reset=0 | turn=0 | hazard=1 | next_state=01
+                6100 reset=0 | turn=1 | hazard=1 | next_state=01
+                7100 reset=0 | turn=0 | hazard=0 | next_state=00
+                8100 reset=0 | turn=1 | hazard=0 | next_state=10
+                9100 reset=0 | turn=0 | hazard=0 | next_state=00
+Simulation ended.

@@ -26,7 +26,8 @@ module Lab3(
 	input 		     [9:0]		SW
 );
 
-`include "verilog/params.vh"
+`include "verilog/params.vh" // quartus
+//`include "../verilog/params.vh" // TEST ONLY
 
 
 //=======================================================
@@ -45,12 +46,13 @@ assign hazard = SW[0];
 assign turn = SW[1];
 assign left = KEY[1];
 
-div10M_5 divider(ADC_CLK_10, ~reset, clock);
+div10M_1 divider(ADC_CLK_10, ~reset, clock);
+//assign clock = ADC_CLK_10; // TEST ONLY
 
 next_state_logic nextStateLogic(reset, turn, hazard, next_state);
 
 //DEBUG: decimal point blinks as clock, HEX0 displays state (0 = idle 1 = hazard 2 = turn)
-sevensegment hex_0(next_state, 0, clock, reset, HEX0);
+sevensegment hex_0(current_state, 0, clock, reset, HEX0);
 sevensegment hex_1(0, 0, 0, 1, HEX1);
 sevensegment hex_2(0, 0, 0, 1, HEX2);
 sevensegment hex_3(0, 0, 0, 1, HEX3);

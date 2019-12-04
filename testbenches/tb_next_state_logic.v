@@ -2,6 +2,18 @@
 // vvp tb_next_state_logic.out > tb_next_state.txt; 
 // gtkwave tb_next_state_logic.vcd -g
 
+/*
+*  this testbench demonstrates that next_state changes appropriately based on 
+*  the reset, turn, and hazard inputs.
+*  
+*  RESET | HAZARD | TURN | STATE
+*    1       x       x      IDLE
+*    0       1       x      HAZARD
+*    0       0       1      TURN
+*    0       0       0      IDLE
+*  
+*/
+
 `timescale 1 ns / 100 ps
 
 module tb_next_state_logic();

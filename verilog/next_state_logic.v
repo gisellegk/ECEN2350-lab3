@@ -5,7 +5,8 @@ module next_state_logic(
     output reg [1:0]next_state
 );
 
-`include "../verilog/params.vh"
+`include "verilog/params.vh" // quartus
+//`include "../verilog/params.vh" // TEST ONLY
 
 always @(*) begin
     if(reset) next_state = IDLE; 
