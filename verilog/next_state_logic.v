@@ -1,5 +1,5 @@
 module next_state_logic(
-    input reset, 
+    input current_state, 
     input turn, 
     input hazard, 
     output reg [1:0]next_state
@@ -8,11 +8,27 @@ module next_state_logic(
 `include "verilog/params.vh" // quartus
 //`include "../verilog/params.vh" // TEST ONLY
 
-always @(*) begin
-    if(reset) next_state = IDLE; 
-    else if (hazard) next_state = HAZARD; 
-    else if(turn) next_state = TURN;
-    else next_state = IDLE;
+always @(current_state) begin
+    case(current_state)
+        IDLE: begin
+            if(hazard) next_state = HAZARD;
+            else if(turn) next_state = TURN;
+            else next_state = IDLE;
+        end
+        HAZARD: begin
+            if(hazard) next_state = HAZARD;
+            else if(turn) next_state = TURN;
+            else next_state = IDLE;
+        end
+        TURN: begin
+            if(hazard) next_state = HAZARD;
+            else if(turn) next_state = TURN;
+            else next_state = IDLE;
+        end
+        default: begin
+        end
+    endcase
+
 end
 
 endmodule
@@ -27,3 +43,9 @@ RESET | HAZARD | TURN | STATE
 
 */
   
+/*always @(*) begin
+    if(reset) next_state = IDLE; 
+    else if (hazard) next_state = HAZARD; 
+    else if(turn) next_state = TURN;
+    else next_state = IDLE;
+end*/
