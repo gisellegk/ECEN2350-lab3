@@ -3,13 +3,13 @@ module blinker(input clock, input state, input direction, output reg [2:0] left,
 `include "verilog/params.vh" // quartus
 //`include "../verilog/params.vh" // TEST ONLY
 
-reg counter;
+reg [2:0]counter;
 
 initial begin
-counter = 0;
+counter = 3'b0;
 end
 
-always @(clock) begin
+always @(posedge clock) begin
 	left = 0;
 	right = 0; 
     if(state == TURN) begin
@@ -29,8 +29,8 @@ always @(clock) begin
     end else if(state == HAZARD) begin
     // do HAZARD logic
 		if(counter>1) begin
-		right = 1;
-		left = 1;
+		right = 3'b111;
+		left = 3'b111;
 		end
     end
 	 
