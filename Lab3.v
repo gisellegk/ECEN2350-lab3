@@ -61,7 +61,7 @@ sevensegment hex_5(0, 0, 0, 1, HEX5);
 
 blinker b(clock, current_state, direction, LEDR[2:0], LEDR[9:7]);
 
-assign LEDR[6:3] = 4'b0000;
+assign LEDR[6:3] = 4'b0000;	
 
 //=======================================================
 //  Structural coding

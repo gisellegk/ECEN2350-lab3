@@ -5,7 +5,7 @@
 set_global_assignment -name FAMILY "MAX 10 FPGA"
 set_global_assignment -name DEVICE 10M50DAF484C7G
 set_global_assignment -name TOP_LEVEL_ENTITY "Lab3"
-set_global_assignment -name ORIGINAL_QUARTUS_VERSION "16.0.0"
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 16.0.0
 set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:22:57 NOVEMBER 20,2019"
 set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
@@ -125,8 +125,8 @@ set_location_assignment PIN_L19 -to HEX5[7]
 #============================================================
 # KEY
 #============================================================
-set_instance_assignment -name IO_STANDARD "3.3 V Schmitt Trigger" -to KEY[0]
-set_instance_assignment -name IO_STANDARD "3.3 V Schmitt Trigger" -to KEY[1]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to KEY[0]
+set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to KEY[1]
 set_location_assignment PIN_B8 -to KEY[0]
 set_location_assignment PIN_A7 -to KEY[1]
 
@@ -190,6 +190,10 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name VERILOG_FILE verilog/rom_inst.v
+set_global_assignment -name VERILOG_FILE verilog/rom_bb.v
+set_global_assignment -name VERILOG_FILE verilog/rom.v
 set_global_assignment -name VERILOG_FILE Lab3.v
 set_global_assignment -name VERILOG_INCLUDE_FILE verilog/params.vh
 set_global_assignment -name VERILOG_FILE verilog/sevensegment.v
@@ -198,4 +202,4 @@ set_global_assignment -name VERILOG_FILE verilog/div10M_5.v
 set_global_assignment -name VERILOG_FILE verilog/div10M_1.v
 set_global_assignment -name VERILOG_FILE verilog/blinker.v
 set_global_assignment -name SDC_FILE Lab3.SDC
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name QIP_FILE rom.qip
