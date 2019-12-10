@@ -16,14 +16,26 @@ module Lab3(
 	output		     [7:0]		HEX4,
 	output		     [7:0]		HEX5,
 
-	//////////// KEY //////////
+	//////////// KEY //////////.
 	input 		     [1:0]		KEY,
 
-	//////////// LED //////////
+	//////////// LED ///////////
 	output		     [9:0]		LEDR,
 
-	//////////// SW //////////
+	//////////// SW ////////////
 	input 		     [9:0]		SW
+	//////////// SDRAM //////////
+	output		    [12:0]		DRAM_ADDR,
+	output		     [1:0]		DRAM_BA,
+	output		          		DRAM_CAS_N,
+	output		          		DRAM_CKE,
+	output		          		DRAM_CLK,
+	output		          		DRAM_CS_N,
+	inout 		    [15:0]		DRAM_DQ,
+	output		          		DRAM_LDQM,
+	output		          		DRAM_RAS_N,
+	output		          		DRAM_UDQM,
+	output		          		DRAM_WE_N
 );
 
 
@@ -41,8 +53,6 @@ wire clock;
 wire reset;
 wire hazard;
 wire turn;
-
-wire [1:0] address;
 
 assign reset = ~KEY[0];
 assign hazard = SW[0];
@@ -72,19 +82,32 @@ assign LEDR[6:3] = 4'b0000;
 //=======================================================
 initial begin
 	current_state = IDLE;
+	counter = 0;
 end
+
+wire [1:0] next_state_auto;
+
+reg [1:0] address;
+
+reg [4:0] counter;
+
 
 always @(posedge clock) begin
-	current_state = next_state;
+		if (SW[9]) begin
+		   current_state = next_state_auto;
+			if(counter != 25) //count to 25
+			counter = counter + 1'b1;
+			else begin
+			address = address + 1'b1;
+			counter = 0;
+			end
+		end 
+		else current_state = next_state;
 end
-	
 
-always @(SW[9]) begin
-	current_state = IDLE;
-	assign address[1:0] <= 2'b00;
-	assign address <= address + 1'b1;	
-end
 
-mem(address,clock,current_state);
+mem mem1(address,clock,next_state_auto);
+
+
 	
 endmodule
