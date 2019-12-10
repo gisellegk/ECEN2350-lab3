@@ -98,9 +98,9 @@ always @(posedge clock) begin
 			end
 		end 
 		else begin
-		current_state = next_state;
-		address = 0;
-		counter = 0;
+			current_state = next_state;
+			address = 0;
+			counter = 0;
 		end
 end
 
