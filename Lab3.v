@@ -59,6 +59,10 @@ assign hazard = SW[0];
 assign turn = SW[1];
 assign left = KEY[1];
 
+wire [1:0] next_state_auto;
+reg [1:0] address;
+reg [4:0] counter;
+
 div10M_5 divider(ADC_CLK_10, 1, clock);
 //assign clock = ADC_CLK_10; // TEST ONLY
 
@@ -75,7 +79,6 @@ sevensegment hex_5(0, 0, 0, 1, HEX5);
 blinker b(clock, current_state, LEDR[9:7],LEDR[2:0]);
 
 assign LEDR[6:3] = 4'b0000;	
-//assign LEDR[3] = left;
 //=======================================================
 //  Structural coding
 //=======================================================
@@ -83,11 +86,6 @@ initial begin
 	current_state = IDLE;
 	counter = 0;
 end
-
-wire [1:0] next_state_auto;
-reg [1:0] address;
-reg [4:0] counter;
-
 
 always @(posedge clock) begin
 		if (SW[9]) begin
@@ -99,7 +97,11 @@ always @(posedge clock) begin
 			counter = 0;
 			end
 		end 
-		else current_state = next_state;
+		else begin
+		current_state = next_state;
+		address = 0;
+		counter = 0;
+		end
 end
 
 

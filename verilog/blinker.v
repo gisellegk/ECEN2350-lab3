@@ -11,8 +11,7 @@ end
 
 always @(posedge clock) begin
 	left = 3'b000;
-	right = 3'b000; 
-	 
+	right = 3'b000;  
 	 //if(state == 0) begin 
 	 if(state == LTURN) begin 
 		if(counter == 0) left[0] = 1;
@@ -37,6 +36,7 @@ always @(posedge clock) begin
 	 if (state == IDLE)begin
 		right = 3'b000;
 		left = 3'b000;
+		counter = 3;
 	 end
 
 	 counter = counter +1;
