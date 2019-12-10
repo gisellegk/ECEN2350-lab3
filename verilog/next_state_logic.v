@@ -8,7 +8,7 @@ module next_state_logic(
 `include "verilog/params.vh" // quartus
 //`include "../verilog/params.vh" // TEST ONLY
 
-always @(current_state) begin
+always @(*) begin
     case(current_state)
         IDLE: begin
             if(hazard) next_state = HAZARD;
