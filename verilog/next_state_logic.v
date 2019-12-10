@@ -1,6 +1,7 @@
 module next_state_logic(
     input current_state, 
     input turn, 
+    input left, 
     input hazard, 
     output reg [1:0]next_state
 );
@@ -12,17 +13,26 @@ always @(*) begin
     case(current_state)
         IDLE: begin
             if(hazard) next_state = HAZARD;
-            else if(turn) next_state = TURN;
+            else if(turn && left) next_state = LTURN;
+            else if(turn) next_state = RTURN;
             else next_state = IDLE;
         end
         HAZARD: begin
             if(hazard) next_state = HAZARD;
-            else if(turn) next_state = TURN;
+            else if(turn && left) next_state = LTURN;
+            else if(turn) next_state = RTURN;
             else next_state = IDLE;
         end
-        TURN: begin
+        LTURN: begin
             if(hazard) next_state = HAZARD;
-            else if(turn) next_state = TURN;
+            else if(turn && left) next_state = LTURN;
+            else if(turn) next_state = RTURN;
+            else next_state = IDLE;
+        end
+        RTURN: begin
+            if(hazard) next_state = HAZARD;
+            else if(turn && left) next_state = LTURN;
+            else if(turn) next_state = RTURN;
             else next_state = IDLE;
         end
         default: begin
