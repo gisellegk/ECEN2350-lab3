@@ -15,16 +15,15 @@ always @(posedge clock) begin
 	 
 	 //if(state == 0) begin 
 	 if(state == LTURN) begin 
-			if(counter == 0) left[2] = 1;
-			if (counter == 1) left [1] = 1;
-			if (counter == 2) left [0] = 1;
+		if(counter == 0) left[0] = 1;
+		if (counter == 1) left [1] = 1;
+		if (counter == 2) left[2] = 1;
 	end
 	else if (state == RTURN) begin
-			if(counter == 0) right[0] = 1;
-			if (counter == 1) right [1] = 1;
-			if (counter == 2) right [2] = 1;
-			//right = 3'b111;
-		end
+		if(counter == 0) right[2] = 1;
+		if (counter == 1) right [1] = 1;
+		if (counter == 2) right [0] = 1;
+		//right = 3'b111
     end
 	 
 	if(state == HAZARD) begin
