@@ -1,12 +1,13 @@
 DEPTH = 4; 
-WIDTH = 4;
+WIDTH = 2;
 
-ADRESS_RADIX = HEX;
-DATA_RADIX = HEX;
+ADRESS_RADIX = BIN;
+DATA_RADIX = BIN;
 
 CONTENT
 BEGIN
-[0..F]: 3FFF;
-6   :   F;
-8:      F E 5;
+00: 00;
+01: 01;
+10: 10;
+11: 11;
 END;

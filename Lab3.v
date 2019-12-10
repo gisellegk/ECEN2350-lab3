@@ -26,6 +26,7 @@ module Lab3(
 	input 		     [9:0]		SW
 );
 
+
 `include "verilog/params.vh" // quartus
 //`include "../verilog/params.vh" // TEST ONLY
 
@@ -40,6 +41,8 @@ wire clock;
 wire reset;
 wire hazard;
 wire turn;
+
+wire [1:0] address;
 
 assign reset = ~KEY[0];
 assign hazard = SW[0];
@@ -73,5 +76,14 @@ end
 always @(posedge clock) begin
 	current_state = next_state;
 end
+	
 
+always @(SW[9]) begin
+	current_state = IDLE;
+	assign address[1:0] <= 2'b00;
+	assign address <= address + 1'b1;	
+end
+
+mem(address,clock,current_state);
+	
 endmodule
