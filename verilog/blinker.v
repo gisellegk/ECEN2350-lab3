@@ -1,4 +1,4 @@
-module blinker(input clock, input state, input direction, output reg [2:0] left, output reg [2:0] right);
+module blinker(input clock, input [1:0]state, input direction, output reg [2:0] left, output reg [2:0] right);
 
 `include "verilog/params.vh" // quartus
 //`include "../verilog/params.vh" // TEST ONLY
@@ -13,8 +13,8 @@ always @(posedge clock) begin
 	left = 3'b000;
 	right = 3'b000; 
 	 
-	 if(state == 0) begin 
-	 //if(state == TURN) begin 
+	 //if(state == 0) begin 
+	 if(state == TURN) begin 
     // do TURN logic
 		if (direction == LEFT) begin
 			if(counter == 0) left[2] = 1;
@@ -37,10 +37,10 @@ always @(posedge clock) begin
 		end
     end
 	 
-	 //if (state == IDLE)begin
-		//right = 3'b000;
-		//left = 3'b000;
-	 //end
+	 if (state == IDLE)begin
+		right = 3'b000;
+		left = 3'b000;
+	 end
 
 	 
 	 
