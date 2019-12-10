@@ -18,13 +18,13 @@ always @(*) begin
         IDLE: begin
             if(hazard) next_state = HAZARD;
             else if(turn && left) next_state = LTURN;
-            else if(turn) next_state = RTURN;
+            else if(turn && ~left) next_state = RTURN;
             else next_state = IDLE;
         end
         HAZARD: begin
             if(hazard) next_state = HAZARD;
             else if(turn && left) next_state = LTURN;
-            else if(turn) next_state = RTURN;
+            else if(turn && ~left) next_state = RTURN;
             else next_state = IDLE;
         end
         LTURN: begin
@@ -36,7 +36,7 @@ always @(*) begin
         RTURN: begin
             if(hazard) next_state = HAZARD;
             else if(turn && left) next_state = LTURN;
-            else if(turn) next_state = RTURN;
+            else if(turn && ~left) next_state = RTURN;
             else next_state = IDLE;
         end
         default: begin
