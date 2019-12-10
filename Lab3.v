@@ -23,7 +23,7 @@ module Lab3(
 	output		     [9:0]		LEDR,
 
 	//////////// SW ////////////
-	input 		     [9:0]		SW
+	input 		     [9:0]		SW,
 	//////////// SDRAM //////////
 	output		    [12:0]		DRAM_ADDR,
 	output		     [1:0]		DRAM_BA,
