@@ -1,4 +1,5 @@
 module next_state_logic(
+    input reset,
     input current_state, 
     input turn, 
     input left, 
@@ -10,6 +11,9 @@ module next_state_logic(
 //`include "../verilog/params.vh" // TEST ONLY
 
 always @(*) begin
+    if(reset) begin
+        next_state = IDLE;
+    end else
     case(current_state)
         IDLE: begin
             if(hazard) next_state = HAZARD;

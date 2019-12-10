@@ -62,7 +62,7 @@ assign left = KEY[1];
 div10M_5 divider(ADC_CLK_10, 1, clock);
 //assign clock = ADC_CLK_10; // TEST ONLY
 
-next_state_logic nextStateLogic(reset, turn, left, hazard, next_state);
+next_state_logic nextStateLogic(reset, current_state, turn, left, hazard, next_state);
 
 //DEBUG: decimal point blinks as clock, HEX0 displays state (0 = idle 1 = hazard 2 = turn)
 sevensegment hex_0(current_state, 0, clock, 0, HEX0);
