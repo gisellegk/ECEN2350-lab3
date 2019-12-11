@@ -39,8 +39,8 @@ module Lab3(
 );
 
 
-`include "verilog/params.vh" // quartus
-//`include "../verilog/params.vh" // TEST ONLY
+//`include "verilog/params.vh" // quartus
+`include "../verilog/params.vh" // FOR TESTBENCH
 
 
 //=======================================================
@@ -63,12 +63,12 @@ wire [1:0] next_state_auto;
 reg [1:0] address;
 reg [4:0] counter;
 
-div10M_5 divider(ADC_CLK_10, 1, clock);
-//assign clock = ADC_CLK_10; // TEST ONLY
+//div10M_5 divider(ADC_CLK_10, 1, clock);
+assign clock = ADC_CLK_10; // FOR TESTBENCH 
 
 next_state_logic nextStateLogic(reset, current_state, turn, left, hazard, next_state);
 
-//DEBUG: decimal point blinks as clock, HEX0 displays state (0 = idle 1 = hazard 2 = turn)
+//DEBUG: decimal point blinks as clock, HEX0 displays state (0 = idle 1 = hazard 2 = Lturn 3= Rturn)
 sevensegment hex_0(current_state, 0, clock, 0, HEX0);
 sevensegment hex_1(0, 0, 0, 1, HEX1);
 sevensegment hex_2(0, 0, 0, 1, HEX2);
@@ -88,6 +88,8 @@ initial begin
 end
 
 always @(posedge clock) begin
+// comment out SW[9] TESTBENCH
+		 /*
 		if (SW[9]) begin
 		   current_state = next_state_auto;
 			if(counter != 25) //count to 25
@@ -98,14 +100,15 @@ always @(posedge clock) begin
 			end
 		end 
 		else begin
+		 */
 			current_state = next_state;
 			address = 0;
 			counter = 0;
-		end
+		//end
 end
 
-
-mem mem1(address,clock,next_state_auto);
+// comment out TESTBENCH
+//mem mem1(address,clock,next_state_auto);
 
 
 	

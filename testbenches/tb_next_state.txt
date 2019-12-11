@@ -1,12 +1,3 @@
-VCD info: dumpfile tb_next_state_logic.vcd opened for output.
+VCD info: dumpfile tb_lights.vcd opened for output.
 Starting simulation
-                  10 reset=1 | turn=0 | hazard=0 | next_state=00
-                  20 reset=1 | turn=1 | hazard=0 | next_state=00
-                  30 reset=1 | turn=1 | hazard=1 | next_state=00
-                  40 reset=0 | turn=0 | hazard=0 | next_state=00
-                  50 reset=0 | turn=0 | hazard=1 | next_state=01
-                  60 reset=0 | turn=1 | hazard=1 | next_state=01
-                  70 reset=0 | turn=0 | hazard=0 | next_state=00
-                  80 reset=0 | turn=1 | hazard=0 | next_state=10
-                  90 reset=0 | turn=0 | hazard=0 | next_state=00
 Simulation ended.

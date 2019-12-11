@@ -48,37 +48,41 @@ initial begin
     reset <= 0;
     turn <= 0;
     hazard <= 0;
+    left <= 0;
+
     #100 // offset state changes so they don't occur with the clock.
     //next_state should be IDLE no matter what
     #1000 reset = 1;
     #1000 turn = 1;
+    #1000 left = 1;
     #1000 hazard = 1;
 
     #1000 reset <= 0;
     turn <= 0;
+    left <= 0;
     hazard <= 0;
 
     // reset = 0. 
     // next_state always HAZARD
     #1000 hazard = 1; 
     #1000 turn = 1;
+    #1000 left = 1;
 
     #1000 reset <= 0;
     turn <= 0;
+    left <= 0; 
     hazard <= 0;
 
     //reset = 0, hazard = 0
     // next_state should be TURN
     #1000 turn = 1;
+    #1000 left = 1;
     // next_state should be IDLE
     #1000 turn = 0;
+    
 
     #2000  $display("Simulation ended.");
     $finish;
-end
-
-initial begin
-      #100 $monitor($time, " reset=%b | turn=%b | hazard=%b | next_state=%b", reset, turn, hazard, NS);
 end
 
 endmodule
