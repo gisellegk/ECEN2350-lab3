@@ -1,7 +1,7 @@
 module blinker(input clock, input [1:0]state, output reg [2:0] left, output reg [2:0] right);
 
-//`include "verilog/params.vh" // quartus
-`include "../verilog/params.vh" // TEST ONLY
+`include "verilog/params.vh" // quartus
+//`include "../verilog/params.vh" // TEST ONLY
 
 reg [2:0]counter;
 reg [1:0] oldstate;

@@ -39,8 +39,8 @@ module Lab3(
 );
 
 
-//`include "verilog/params.vh" // quartus
-`include "../verilog/params.vh" // FOR TESTBENCH
+`include "verilog/params.vh" // quartus
+//`include "../verilog/params.vh" // FOR TESTBENCH
 
 
 //=======================================================
@@ -63,8 +63,8 @@ wire [1:0] next_state_auto;
 reg [1:0] address;
 reg [4:0] counter;
 
-//div10M_5 divider(ADC_CLK_10, 1, clock);
-assign clock = ADC_CLK_10; // FOR TESTBENCH 
+div10M_5 divider(ADC_CLK_10, 1, clock);
+//assign clock = ADC_CLK_10; // FOR TESTBENCH 
 
 next_state_logic nextStateLogic(reset, current_state, turn, left, hazard, next_state);
 
@@ -89,7 +89,7 @@ end
 
 always @(posedge clock) begin
 // comment out SW[9] TESTBENCH
-		 /*
+		 
 		if (SW[9]) begin
 		   current_state = next_state_auto;
 			if(counter != 25) //count to 25
@@ -100,15 +100,15 @@ always @(posedge clock) begin
 			end
 		end 
 		else begin
-		 */
+		 
 			current_state = next_state;
 			address = 0;
 			counter = 0;
-		//end
+		end
 end
 
 // comment out TESTBENCH
-//mem mem1(address,clock,next_state_auto);
+mem mem1(address,clock,next_state_auto);
 
 
 	
